@@ -17,6 +17,7 @@ public class Carbono_Calculator {
     @Column(name = "date_result", nullable = false)
     private Date date_result;
 
+    //Contructor
     public Carbono_Calculator(){}
 
     public int getId() {
