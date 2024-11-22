@@ -2,7 +2,7 @@ package com.energy_backend.energy_api.model;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
+//import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -28,7 +28,7 @@ public class Comment {
 //    ^^^ quitar comentarios cuando se agregue la tabla usuario
 //
 //    @OneToMany(mappedBy = "user") // Inverse side
-//    private List<Comment> comments;
+//    private List<CommentRepository> comments;
 //    ^^^ esto iria en la tabla/clase User
 public int getId() {
     return id;
