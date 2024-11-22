@@ -1,7 +1,6 @@
 package com.energy_backend.energy_api.controller;
 
 import com.energy_backend.energy_api.service.CommentService;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +20,9 @@ public class CommentController {
     }
 
 
-    @GetMapping("/")
-    public ResponseEntity<?> findById(@PathVariable Integer Id){
-        commentService.
-    }
+//    @GetMapping("/")
+//    public ResponseEntity<?> findById(@PathVariable Integer Id){
+//
+//        return;
+//    }
 }
