@@ -24,7 +24,7 @@ public class CommentService {
         }
     }
 
-    public List<Comment> findAllComments(){
+    public List<Comment> findAllCommentsByNewsId(){
         try {
             return commentRepository.findAll();
         } catch (Exception e) {

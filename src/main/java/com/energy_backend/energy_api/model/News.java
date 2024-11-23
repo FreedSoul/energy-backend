@@ -2,13 +2,11 @@ package com.energy_backend.energy_api.model;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.CurrentTimestamp;
 
-import java.util.Date;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
 @Entity
 @Table(name = "news")
@@ -22,9 +20,9 @@ public class News {
     private String content;
     @Column(name = "author", nullable = false, length = 255)
     private String author;
-    @Column(name = "publish_at")
-    @CurrentTimestamp
-    private Date date_publish;
+    @CreationTimestamp
+    @Column(name = "publish_at", columnDefinition = "TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime datePublish;
     @ManyToMany
     @JoinTable(
             name = "news_comments",
@@ -73,12 +71,12 @@ public class News {
         this.author = author;
     }
 
-    public Date getDate_publish() {
-        return date_publish;
+    public LocalDateTime getDatePublish() {
+        return datePublish;
     }
 
-    public void setDate_publish(Date date_publish) {
-        this.date_publish = date_publish;
+    public void setDatePublish(LocalDateTime datePublish) {
+        this.datePublish = datePublish;
     }
 
     public Set<Comment> getComments() {
