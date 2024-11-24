@@ -17,7 +17,7 @@ public class NewsService {
 
     public News findById(int id){
         try{
-            return newsRepository.getReferenceById(id);
+            return newsRepository.findById(id).orElseThrow(IllegalAccessException::new);
         } catch (Exception e) {
             throw new DatabaseOperationException("Error al encontrar la referencia de la noticia por su id",e);
         }

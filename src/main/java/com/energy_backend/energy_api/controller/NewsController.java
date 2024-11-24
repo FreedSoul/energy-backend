@@ -1,11 +1,12 @@
 package com.energy_backend.energy_api.controller;
 
-import com.energy_backend.energy_api.model.Comment;
+import com.energy_backend.energy_api.model.News;
 import com.energy_backend.energy_api.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -18,14 +19,12 @@ public class NewsController {
     }
 
     @GetMapping("/news")
-    public List<Comment> getAllNewsById(){
-        newsService.listAllNews();
-        return List.of();
+    public Optional<List<News>> getAllNewsById(){
+        return Optional.ofNullable(newsService.listAllNews());
     }
 
-//    @GetMapping("/news/{id}")
-//    public List<Comment> getANewsById(@PathVariable Integer id){
-//
-//        return List.of();
-//    }
+    @GetMapping("/news/{newsId}")
+    public Optional<News> getOneNewsById(@PathVariable Integer newsId){
+        return Optional.ofNullable(newsService.findById(newsId));
+    }
 }

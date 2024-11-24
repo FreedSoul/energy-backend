@@ -24,13 +24,13 @@ public class CommentController {
 
     @PostMapping("/comment")
     public ResponseEntity<String> findById(@Valid @RequestBody Comment comment) {
-        commentService.insertComment(comment);
-        return ResponseEntity.status(HttpStatus.CREATED).body("comentario insertado con exito!");
+        Comment commentSaved = commentService.insertComment(comment);
+        return ResponseEntity.status(HttpStatus.CREATED).body("comentario insertado con exito!"+ commentSaved);
     }
 
-//    @GetMapping("/comments/{newsId}")
-//    public List<Comment> getAllCommentsByNewsId(@PathVariable Integer newsId){
-//
-//        return List.of();
-//    }
+    @GetMapping("/comments/{newsId}")
+    public List<Comment> getAllCommentsByNewsId(@PathVariable Integer newsId){
+        return commentService.findAllCommentsByNewsId(newsId);
+
+    }
 }
