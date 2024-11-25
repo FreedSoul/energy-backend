@@ -2,7 +2,10 @@ package com.energy_backend.energy_api.service;
 
 import com.energy_backend.energy_api.exceptions.DatabaseOperationException;
 import com.energy_backend.energy_api.model.Comment;
+import com.energy_backend.energy_api.model.News;
 import com.energy_backend.energy_api.repository.CommentRepository;
+import com.energy_backend.energy_api.repository.NewsRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +15,23 @@ import java.util.List;
 public class CommentService {
 
     private final CommentRepository commentRepository;
+    private final NewsRepository newsRepository;
 
     @Autowired
-    public CommentService(CommentRepository commentRepository){
+    public CommentService(CommentRepository commentRepository, NewsRepository newsRepository){
         this.commentRepository = commentRepository;
+        this.newsRepository = newsRepository;
     }
 
-    public Comment insertComment(Comment comment){
+    public void insertComment(Comment commentBody, Integer newsId){
+            News news = newsRepository.findById(newsId).orElseThrow(()-> new EntityNotFoundException("Noticia con "+newsId+"no encontrada"));
+            Comment commentToSave = new Comment();
+            commentToSave.setBody(commentBody.getBody());
+            commentBody.getNews().add(news);
+            commentToSave.getNews().add(news);
+            news.getComments().add(commentToSave);
         try {
-            return commentRepository.save(comment);
+            commentRepository.save(commentToSave);
         } catch (Exception e) {
             throw new DatabaseOperationException("Error al ejecutar el guardado del comentario en BD",e);
         }

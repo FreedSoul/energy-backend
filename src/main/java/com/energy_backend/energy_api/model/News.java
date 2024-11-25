@@ -6,7 +6,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Logger;
 
 @Entity
 @Table(name = "news")
@@ -23,7 +22,7 @@ public class News {
     @CreationTimestamp
     @Column(name = "publish_at", columnDefinition = "TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime datePublish;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "news_comments",
             joinColumns = { @JoinColumn(name = "news_id") },

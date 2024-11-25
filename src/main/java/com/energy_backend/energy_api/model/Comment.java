@@ -1,5 +1,6 @@
 package com.energy_backend.energy_api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
@@ -21,7 +22,8 @@ public class Comment {
     @CreationTimestamp
     @Column(name = "created_at", updatable = false,columnDefinition = "TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime date;
-    @ManyToMany(mappedBy = "comments")
+    @ManyToMany(mappedBy = "comments", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<News> news = new HashSet<>();
 //    @ManyToOne
 //    @JoinColumn(name = "user_id")
