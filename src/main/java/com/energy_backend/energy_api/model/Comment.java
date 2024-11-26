@@ -22,17 +22,13 @@ public class Comment {
     private LocalDateTime date;
     @ManyToMany(mappedBy = "comments")
     private Set<News> news = new HashSet<>();
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private User user;
-//    ^^^ quitar comentarios cuando se agregue la tabla usuario
-//
-//    @OneToMany(mappedBy = "user") // Inverse side
-//    private List<CommentRepository> comments;
-//    ^^^ esto iria en la tabla/clase User
-public int getId() {
-    return id;
-}
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public int getId() {
+        return id;
+    }
 
     public void setId(int id) {
         this.id = id;
