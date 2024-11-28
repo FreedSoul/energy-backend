@@ -49,4 +49,4 @@ target/
 .vscode/
 
 ###Connection BD###
-application.properties
+*.properties
