@@ -21,21 +21,36 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    //Optional tipo para evitar el nullpointerException
+    // Optional se usa para evitar NullPointerException si el usuario no se encuentra
     public Optional<User> getUserById(Integer id) {
         try {
             return userRepository.findById(id);
         } catch (Exception e) {
-            throw new RuntimeException("Usuario no encontrado" , e);
+            throw new RuntimeException("Error al buscar el usuario con ID:" + id , e);
         }
     }
 
-    public User createUser(User user)
-    {
+    public User createUser(User user) {
         try {
             return userRepository.save(user);
         } catch (Exception e) {
             throw new RuntimeException("Error al guardar el usuario ", e);
+        }
+    }
+
+    public User updateUser(User user) {
+        try {
+            return userRepository.save(user);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al actualizar el usuario ", e);
+        }
+    }
+
+    public void deleteUser(Integer id) {
+        try {
+            userRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al eliminar el usuario con ID:" + id, e);
         }
     }
 }

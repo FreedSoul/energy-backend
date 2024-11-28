@@ -47,3 +47,6 @@ target/
 
 ### VS Code ###
 .vscode/
+
+###Connection BD###
+application.properties
