@@ -4,8 +4,11 @@ package com.energy_backend.energy_api.service;
 import com.energy_backend.energy_api.model.User;
 import com.energy_backend.energy_api.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 //Para trabajar con las interfaz repository
@@ -43,6 +46,23 @@ public class UserService {
             return userRepository.save(user);
         } catch (Exception e) {
             throw new RuntimeException("Error al actualizar el usuario ", e);
+        }
+    }
+
+    public Optional<User> partialUpdateUser(Integer id, Map<String, Object> updates) {
+        try {
+            return userRepository.findById(id).map(user -> {
+                updates.forEach((key, value) -> {
+                    Field field = ReflectionUtils.findField(User.class, key);
+                    if(field != null) {
+                        field.setAccessible(true);
+                        ReflectionUtils.setField(field, user, value);
+                    }
+                });
+                return userRepository.save(user);
+            });
+        } catch (Exception e) {
+            throw new RuntimeException("Error a la actualización parcial del usuario con ID:" + id , e);
         }
     }
 

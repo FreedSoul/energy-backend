@@ -1,11 +1,12 @@
 package com.energy_backend.energy_api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+//import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
+
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,20 +17,21 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "body", nullable = false, columnDefinition = "text")
+    @com.energy_backend.energy_api.model.NotNull(message = "el cuerpo del comentario no puede estar vacio")
     private String body;
-    @Column(name = "created_at", updatable = false, nullable = false)
     @CreationTimestamp
+    @Column(name = "created_at", updatable = false,columnDefinition = "TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime date;
-    @ManyToMany(mappedBy = "comments")
+    @ManyToMany(mappedBy = "comments", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<News> news = new HashSet<>();
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
     public int getId() {
-    return id;
-}
+        return id;
+    }
 
     public void setId(int id) {
         this.id = id;

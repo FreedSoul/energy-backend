@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController //Encargado de manejar los endpoints
@@ -65,6 +66,13 @@ public class UserController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @PatchMapping("/user/{id}")
+    public ResponseEntity<User> partialUpdateUser(@PathVariable Integer id, @RequestBody Map<String, Object> updates) {
+        return userService.partialUpdateUser(id, updates)
+                .map(ResponseEntity::ok)
+               .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/user/{id}")
