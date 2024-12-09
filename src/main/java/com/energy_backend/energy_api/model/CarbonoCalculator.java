@@ -10,8 +10,9 @@ public class CarbonoCalculator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "user_id", nullable = false)
-    private int user_id;
+    @OneToOne
+    @PrimaryKeyJoinColumn(name = "user_id")
+    private User user;
     @Column(name = "result", nullable = false)
     private int result;
     @Column(name = "date_result", nullable = false)
@@ -24,18 +25,16 @@ public class CarbonoCalculator {
         return id;
     }
 
-    //prueba de comentario
-
     public void setId(int id) {
         this.id = id;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getResult() {

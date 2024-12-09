@@ -25,8 +25,17 @@ public class Comment {
     @ManyToMany(mappedBy = "comments", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<News> news = new HashSet<>();
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     public int getId() {
