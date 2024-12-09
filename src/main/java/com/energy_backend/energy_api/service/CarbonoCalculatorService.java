@@ -38,5 +38,4 @@ public class CarbonoCalculatorService {
             throw new RuntimeException(e);
         }
     }
-
 }

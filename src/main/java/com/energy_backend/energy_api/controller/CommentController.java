@@ -1,7 +1,10 @@
 package com.energy_backend.energy_api.controller;
 
 import com.energy_backend.energy_api.model.Comment;
+import com.energy_backend.energy_api.repository.classes.commentRepo;
+import com.energy_backend.energy_api.repository.classes.userRepo;
 import com.energy_backend.energy_api.service.CommentService;
+import com.energy_backend.energy_api.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +26,7 @@ public class CommentController {
 
 
     @PostMapping("/comment/news/{newsId}")
-    public ResponseEntity<String> findById(@Valid @RequestBody Comment commentBody, @PathVariable Integer newsId) {
+    public ResponseEntity<String> insertComment(@Valid @RequestBody commentRepo commentBody, @PathVariable Integer newsId) {
         commentService.insertComment(commentBody,newsId);
         return ResponseEntity.status(HttpStatus.CREATED).body("comentario insertado con exito!");
     }
