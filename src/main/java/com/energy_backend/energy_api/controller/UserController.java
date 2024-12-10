@@ -86,7 +86,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/user/login")
+    @RequestMapping("/user/login")
     public User Login(@RequestBody login loginDetails) {
         try {
             return userService.Login(loginDetails);
