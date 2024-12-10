@@ -26,6 +26,9 @@ public class User {
     @OneToMany(mappedBy = "user") // Inverse side
     private List<Comment> comments;
 
+    @OneToMany(mappedBy = "user") // Inverse side
+    private List<CarbonoCalculator> carbonCalculators;
+
     //Constructor
     public User(String phone, String password, String email, String username) {
         this.phone = phone;

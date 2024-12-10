@@ -3,6 +3,7 @@ package com.energy_backend.energy_api.service;
 //import com.energy_backend.energy_api.exceptions.DatabaseOperationException;
 import com.energy_backend.energy_api.model.User;
 import com.energy_backend.energy_api.repository.UserRepository;
+import com.energy_backend.energy_api.repository.classes.login;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
@@ -72,5 +73,9 @@ public class UserService {
         } catch (Exception e) {
             throw new RuntimeException("Error al eliminar el usuario con ID:" + id, e);
         }
+    }
+
+    public User Login(login userDetails) {
+        return userRepository.findUserByNameAndPassword(userDetails.username, userDetails.password).getFirst();
     }
 }

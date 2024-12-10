@@ -10,8 +10,8 @@ public class CarbonoCalculator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne
-    @PrimaryKeyJoinColumn(name = "user_id")
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
     @Column(name = "result", nullable = false)
     private int result;

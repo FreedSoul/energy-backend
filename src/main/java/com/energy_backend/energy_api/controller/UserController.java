@@ -2,6 +2,7 @@ package com.energy_backend.energy_api.controller;
 
 //import com.energy_backend.energy_api.exceptions.DatabaseOperationException;
 import com.energy_backend.energy_api.model.User;
+import com.energy_backend.energy_api.repository.classes.login;
 import com.energy_backend.energy_api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController //Encargado de manejar los endpoints
-//@RequestMapping("/api")
+@RequestMapping("/api")
 public class UserController {
     private final UserService userService;
 
@@ -21,7 +22,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/users")
+    @GetMapping("/user")
     public List<User> getAllUsers() {
         try {
             return userService.getAllUsers();
@@ -82,6 +83,15 @@ public class UserController {
             return ResponseEntity.noContent().build();
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/user/login")
+    public User Login(@RequestBody login loginDetails) {
+        try {
+            return userService.Login(loginDetails);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Usuario no encontrado " + e);
         }
     }
 }
