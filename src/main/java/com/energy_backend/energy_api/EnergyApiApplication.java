@@ -18,7 +18,7 @@ public class EnergyApiApplication {
 		@Override
 		public void addCorsMappings(CorsRegistry registry) {
 			registry.addMapping("/**")
-					.allowedOrigins("http://127.0.0.1:5173/")
+					.allowedOrigins("*")
 					.allowedMethods("GET","POST", "PUT", "DELETE", "OPTIONS", "HEAD");
 		}
 

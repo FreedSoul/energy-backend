@@ -28,4 +28,9 @@ INSERT INTO news (id,author, content, title)
     VALUES (10, 'Ifad', 'El árido Altiplano boliviano se encuentra a la sombra de los Andes. Aquí, René Soto Vadillo, como sus padres antes que él, solía tener que acarrear agua por varios kilómetros para dar de beber a su rebaño de llamas y alpacas. Por eso, cuando en el marco del Programa de Fortalecimiento Integral de la Cadena de Valor de los Camélidos en el Altiplano Boliviano (Pro‑Camélidos), financiado por el FIDA, se descubrió una masa de agua oculta bajo el suelo seco, René se alegró mucho. Gracias a este programa se instalaron bombas de agua alimentadas por energía solar, que ahora proporcionan agua a su rebaño sin liberar carbono en el delicado ecosistema de alta montaña. Ampliar información:http://surl.li/vrxifs', 'Energía limpia para comunidades rurales prósperas');
 
 /*Comentarios*/
-INSERT INTO comment (body, user_id) VALUES ('matt the beast',1);
+INSERT INTO comment (body, user_id) VALUES ('hi, im the beast',1);
+INSERT INTO comment (body, user_id) VALUES ('hola mundo',1);
+
+/*relacionando Comentarios - Noticias*/
+INSERT INTO news_comments (news_id, comment_id) VALUES (1,1);
+INSERT INTO news_comments (news_id, comment_id) VALUES (1,2);
