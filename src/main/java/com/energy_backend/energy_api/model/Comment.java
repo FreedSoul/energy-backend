@@ -26,6 +26,16 @@ public class Comment {
     @JsonIgnore
     private Set<News> news = new HashSet<>();
 
+    public Comment( ) { }
+
+    public Comment(int id, String body, LocalDateTime date, Set<News> news, User user) {
+        this.id = id;
+        this.body = body;
+        this.date = date;
+        this.news = news;
+        this.user = user;
+    }
+
     public User getUser() {
         return user;
     }

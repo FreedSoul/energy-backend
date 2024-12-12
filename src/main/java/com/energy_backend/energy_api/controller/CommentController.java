@@ -1,6 +1,7 @@
 package com.energy_backend.energy_api.controller;
 
 import com.energy_backend.energy_api.model.Comment;
+import com.energy_backend.energy_api.repository.classes.CommentResponseRepo;
 import com.energy_backend.energy_api.repository.classes.commentRepo;
 import com.energy_backend.energy_api.repository.classes.userRepo;
 import com.energy_backend.energy_api.service.CommentService;
@@ -32,7 +33,7 @@ public class CommentController {
     }
 
     @GetMapping("/comment/news/{newsId}")
-    public List<Comment> getAllCommentsByNewsId(@PathVariable Integer newsId){
+    public List<CommentResponseRepo> getAllCommentsByNewsId(@PathVariable Integer newsId){
         return commentService.findAllCommentsByNewsId(newsId);
 
     }

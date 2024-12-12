@@ -7,6 +7,8 @@ import com.energy_backend.energy_api.model.User;
 import com.energy_backend.energy_api.repository.CommentRepository;
 import com.energy_backend.energy_api.repository.NewsRepository;
 import com.energy_backend.energy_api.repository.UserRepository;
+import com.energy_backend.energy_api.repository.classes.CommentResponseRepo;
+import com.energy_backend.energy_api.repository.classes.UserResponseRepo;
 import com.energy_backend.energy_api.repository.classes.commentRepo;
 import com.energy_backend.energy_api.repository.classes.userRepo;
 import jakarta.persistence.EntityNotFoundException;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentService {
@@ -46,9 +49,15 @@ public class CommentService {
         }
     }
 
-    public List<Comment> findAllCommentsByNewsId(Integer newsId){
+    public List<CommentResponseRepo> findAllCommentsByNewsId(Integer newsId){
         try {
-            return commentRepository.findCommentsByNewsId(newsId);
+            List<Comment> commentList = commentRepository.findCommentsByNewsId(newsId);
+            return commentList.stream().map(comment -> {
+                User user = comment.getUser();
+                UserResponseRepo userResponseRepo = new UserResponseRepo(user.getUsername(),user.getEmail());
+                return new CommentResponseRepo(comment.getId(),comment.getBody(),userResponseRepo,comment.getDate());
+            }).collect(Collectors.toList());
+//            return commentRepository.findCommentsByNewsId(newsId);
         } catch (Exception e) {
             throw new DatabaseOperationException("Error al listar los comentarios de la BD",e);
         }

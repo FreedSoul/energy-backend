@@ -6,28 +6,28 @@ import java.util.List;
 @Entity //Ayuda a que la clase se comporte como entidad
 @Table(name = "users") //Anotación para nombrar la tabla
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //Para que la primarykey sea autoincremental
-    private Integer id;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY) //Para que la primarykey sea autoincremental
+        private Integer id;
 
-    @Column(name = "username", nullable = false, length = 255)
-    private String username;
+        @Column(name = "username", nullable = false, length = 255)
+        private String username;
 
-    @Column(name = "email", nullable = false, unique = true, length = 255)
-    private String email;
+        @Column(name = "email", nullable = false, unique = true, length = 255)
+        private String email;
 
-    @Column(name = "password", nullable = false, length = 255)
-    private String password;
+        @Column(name = "password", nullable = false, length = 255)
+        private String password;
 
-    @Column(name = "phone", nullable = false, length = 255)
-    private String phone;
+        @Column(name = "phone", nullable = false, length = 255)
+        private String phone;
 
-    //Relación de uno a muchos
-    @OneToMany(mappedBy = "user") // Inverse side
-    private List<Comment> comments;
+        //Relación de uno a muchos
+        @OneToMany(mappedBy = "user") // Inverse side
+        private List<Comment> comments;
 
-    @OneToMany(mappedBy = "user") // Inverse side
-    private List<CarbonoCalculator> carbonCalculators;
+        @OneToMany(mappedBy = "user") // Inverse side
+        private List<CarbonoCalculator> carbonCalculators;
 
     //Constructor
     public User(String phone, String password, String email, String username) {

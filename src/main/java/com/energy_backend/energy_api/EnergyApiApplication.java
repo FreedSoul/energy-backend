@@ -21,6 +21,5 @@ public class EnergyApiApplication {
 					.allowedOrigins("*")
 					.allowedMethods("GET","POST", "PUT", "DELETE", "OPTIONS", "HEAD");
 		}
-
 	}
 }
